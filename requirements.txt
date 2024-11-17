@@ -1,6 +1,5 @@
 ruff
 black
-detect-secrets
 boto3
 botocore
 fastembed

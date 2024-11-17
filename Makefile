@@ -1,10 +1,7 @@
-.PHONY: lint format secrets-init
+.PHONY: lint format
 
 lint:
 	ruff check . --fix
 
 format:
 	black .
-
-secrets-init:
-	detect-secrets scan --baseline .secrets.baseline
