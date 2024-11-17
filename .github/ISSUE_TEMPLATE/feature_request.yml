@@ -1,0 +1,39 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve?
+      placeholder: Describe the problem or limitation you're facing
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: What's your suggested solution?
+      placeholder: Describe how you'd like this feature to work
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative solutions?
+      placeholder: Any workarounds or different approaches?
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Final Checklist
+      options:
+        - label: This feature would be useful to other users
+          required: true
+        - label: I'm willing to help implement this feature
+          required: false
