@@ -1,5 +1,10 @@
 # RAG-Ingest: PDF to Markdown Extraction and Indexing for RAG
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Author: Arun Brahma](https://img.shields.io/badge/Author-Arun%20Brahma-blue)](https://github.com/iamarunbrahma)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/iamarunbrahma)
+[![Medium](https://img.shields.io/badge/Medium-Follow-black)](https://medium.com/@iamarunbrahma)
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Features](#features)
@@ -10,22 +15,25 @@
 7. [Project Structure](#project-structure)
 8. [How It Works](#how-it-works)
 9. [Troubleshooting](#troubleshooting)
-10. [Host OLLAMA locally](#host-ollama-locally)
+10. [Host Ollama locally](#host-ollama-locally)
+11. [Disclaimer](#disclaimer)
 
 ## Introduction
-
 RAG-Ingest is an advanced tool designed to seamlessly convert PDF documents into markdown format while preserving the original layout and formatting. It leverages state-of-the-art technologies to extract text, images, tables, and code blocks, making them ready for sophisticated natural language processing tasks. The extracted content is indexed in a vector database (Qdrant) to enhance Retrieval Augmented Generation (RAG) capabilities, enabling efficient and context-aware information retrieval.
+
 
 ## Features
 
-- **PDF to Markdown Conversion**: Preserves layout and formatting.
-- **Image Handling**: Extracts images with captions using VisionEncoderDecoderModel.
-- **Table Processing**: Detects and converts tables to markdown using pdfplumber.
-- **Header and Code Block Detection**: Identifies headers and code blocks with language detection.
-- **Vector Indexing**: Utilizes Qdrant for efficient retrieval and storage.
-- **Multi-PDF Support**: Processes multiple PDFs simultaneously.
-- **Configurable Settings**: Allows fine-tuning of extraction parameters.
-- **Debug Mode**: Saves extracted content to a temporary directory for debugging.
+- **Intelligent PDF Processing**: Advanced text extraction with layout preservation using PyMuPDF
+- **Smart Content Structuring**: Automatic detection of headers, lists, code blocks with language identification
+- **Context-Aware Processing**: Uses LLaMA model for contextual enhancement of document chunks
+- **Hybrid Search Capabilities**: Combines dense and sparse embeddings via Qdrant for improved retrieval
+- **Image Processing**: Automated image extraction and captioning using ViT-GPT2
+- **Table Extraction**: Converts complex PDF tables to markdown using pdfplumber
+- **Code Block Detection**: Language-specific code block identification for multiple programming languages
+- **Vector Storage**: Efficient document indexing with Qdrant vector store
+- **Cloud Integration**: AWS S3 integration for persistent storage and document management
+
 
 ## Prerequisites
 
@@ -41,6 +49,7 @@ RAG-Ingest is an advanced tool designed to seamlessly convert PDF documents into
   - macOS: Download from [Ollama](https://ollama.com/download/mac)
   - Windows: Check [Ollama GitHub](https://github.com/ollama/ollama) for updates
 - **Qdrant**: Ensure Qdrant service is running for vector storage.
+
 
 ## Installation
 
@@ -71,6 +80,7 @@ RAG-Ingest is an advanced tool designed to seamlessly convert PDF documents into
   - On macOS: Download from [Ollama](https://ollama.com/download/mac)
   - On Windows: Currently in beta, check [Ollama GitHub](https://github.com/ollama/ollama) for updates
 
+
 ## Configuration
 
 - **Environment Variables:**
@@ -99,6 +109,7 @@ RAG-Ingest is an advanced tool designed to seamlessly convert PDF documents into
     - Customize chunk modification templates.
     - Establish context-aware processing rules.
 
+
 ## Usage
 
 To extract markdown from a PDF and index it:
@@ -114,6 +125,7 @@ Arguments:
 - `--md_flag`: Flag to process markdown files instead of PDFs
 - `--debug_mode`: Flag to enable debugging mode
 
+
 ## Project Structure
 
 ```bash
@@ -126,116 +138,46 @@ Arguments:
 └── README.md
 ```
 
+
 ## How It Works
 
-### PDF Extraction (extract.py)
-- **Text Processing**
-  - Uses PyMuPDF (fitz) for primary text and layout extraction
-  - Implements intelligent font size detection for header levels
-  - Preserves document structure and formatting
-  - Handles bullet points and numbered lists conversion
+1. **PDF Extraction (extract.py)**
+The extraction process begins by analyzing PDF documents using PyMuPDF for core content extraction. The system intelligently identifies document structure including headers, lists, and code blocks while preserving the original layout. Images are extracted and processed using VisionEncoderDecoderModel for automated captioning, while tables are converted to markdown format using pdfplumber. The process maintains document fidelity by preserving formatting, handling special characters, and processing mathematical formulas.
 
-- **Layout Analysis**
-  - Maintains original document layout and spacing
-  - Detects and processes multi-column layouts
-  - Preserves paragraph structure and indentation
-  - Identifies and converts horizontal lines and special characters
+2. **Indexing (index.py)**
+The indexing process starts by splitting documents into semantic chunks using SentenceSplitter while maintaining document metadata. These chunks are enhanced using Ollama for context-aware processing, ensuring semantic relationships between sections are preserved. The processed chunks are then vectorized using HuggingFace embeddings and stored in Qdrant vector store, enabling efficient hybrid search capabilities. The system supports both PDF and markdown inputs, with automatic version control and persistent storage management.
 
-- **Special Elements Processing**
-  - Extracts and processes tables using pdfplumber
-  - Detects and formats code blocks with language identification
-  - Handles hyperlinks and cross-references
-  - Processes mathematical formulas and special symbols
-
-- **Image Handling**
-  - Extracts embedded images with position preservation
-  - Uses VisionEncoderDecoderModel for image captioning
-  - Implements OCR using Tesseract for text in images
-  - Saves images with contextual filenames
-
-### Indexing (index.py)
-- **Document Processing**
-  - Splits documents into semantic chunks using SentenceSplitter
-  - Maintains document metadata and structure
-  - Processes multiple files in parallel
-  - Handles both PDF and markdown inputs
-
-- **Context Enhancement**
-  - Uses OLLAMA for context-aware chunk processing
-  - Implements retry mechanism for model requests
-  - Maintains document context across chunks
-  - Preserves semantic relationships between sections
-
-- **Vector Storage**
-  - Integrates with Qdrant for vector storage
-  - Implements efficient document refresh strategies
-  - Enables hybrid search capabilities
-  - Maintains persistent storage with version control
-
-- **Model Integration**
-  - Uses HuggingFace embeddings for vector representation
-  - Implements OLLAMA for context processing
-  - Supports multiple LLM models
-  - Handles model loading and resource management
 
 ## Troubleshooting
 
-1. **CUDA Memory Issues**
-   - If encountering CUDA out-of-memory errors:
-     - Reduce `OLLAMA_CTX_LENGTH` in config.yaml (default: 65536)
-     - Lower batch size for processing
-     - Consider using a smaller model like `llama2:7b` instead of `llama3.1:8b`
-     - Clear CUDA cache using `torch.cuda.empty_cache()` before running
+- **Memory Issues**
+  - Reduce `OLLAMA_CTX_LENGTH` in config.yaml
+  - Process large PDFs in smaller batches
+  - Enable debug mode to track memory usage: `--debug_mode`
 
-2. **OCR and Image Processing**
-   - For Tesseract OCR issues:
-     - Verify Tesseract installation: `tesseract --version`
-     - Set correct path in system environment variables
-     - For Windows: Add Tesseract installation directory to PATH
-     - Check image quality and DPI settings if OCR accuracy is low
+- **Processing Errors**
+  - Verify PDF isn't password-protected
+  - Check Tesseract OCR installation
+  - Ensure sufficient disk space for image extraction
+  - Monitor `logs/extract.log` and `logs/index.log`
 
-3. **Vector Database Connection**
-   - If Qdrant connection fails:
-     - Verify `QDRANT_URL` and `QDRANT_API_KEY` in .env file
-     - Check if Qdrant service is running and accessible
-     - Ensure collection name matches in configuration
-     - Try local Qdrant instance for testing: `docker run -p 6333:6333 qdrant/qdrant`
+- **Vector Store Issues**
+  - Verify Qdrant connection settings
+  - Check collection name uniqueness
+  - Monitor Qdrant logs for indexing errors
 
-4. **PDF Processing Errors**
-   - When PDF extraction fails:
-     - Check PDF file permissions and encryption
-     - Verify PDF is not corrupted (try opening in different viewers)
-     - For large PDFs (>100MB), increase system memory allocation
+- **Cloud Storage**
+  - Verify AWS credentials in Secrets Manager
+  - Check S3 bucket permissions
+  - Ensure sufficient S3 bucket space
 
-5. **OLLAMA Model Issues**
-   - If OLLAMA model fails to load:
-     - Verify OLLAMA service is running: `ollama list`
-     - Check model availability: `ollama pull llama3.1:8b`
-     - Monitor system resources during model loading
-     - Consider reducing model size or using quantized versions
+- **Model Loading**
+  - Verify Ollama installation
+  - Check model availability: `ollama list`
+  - Monitor GPU memory usage
 
-6. **Performance Optimization**
-   - For slow processing:
-     - Increase worker threads in parallel processing
-     - Adjust chunk size in `config.yaml`
-     - Use SSD storage for better I/O performance
-     - Enable GPU acceleration if available
 
-7. **Environment Setup**
-   - Common setup issues:
-     - Use Python 3.8+ (verify with `python --version`)
-     - Install all dependencies: `pip install -r requirements.txt`
-     - Create isolated environment: `python -m venv venv`
-     - For M1/M2 Macs, use Miniforge for ARM-compatible packages
-
-8. **Storage and Output**
-   - When facing storage issues:
-     - Clear output directory regularly: `rm -rf outputs/*`
-     - Monitor disk space for vector store
-     - Check log files in `logs/` directory for errors
-     - Use `persist_dir` argument to manage index storage location
-
-## Host OLLAMA locally
+## Host Ollama locally
 
 - **Installation Options:**
   - Linux: Execute `curl -fsSL https://ollama.com/install.sh | sh`
@@ -272,3 +214,8 @@ Arguments:
   - Run behind firewall/reverse proxy
   - Avoid exposing to public internet
   - Use latest version for security updates
+
+
+## Disclaimer
+
+This codebase is provided under the MIT License. While efforts have been made to ensure reliability, the codebase is provided "as is" without warranty of any kind. The authors are not responsible for any damages or liabilities arising from its use. This project involves memory-intensive operations and requires appropriate computational resources.
