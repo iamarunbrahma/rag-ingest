@@ -406,7 +406,10 @@ class Index:
                     try:
                         logger.info(f"Uploading {local_file.name} to {s3_key}")
                         self.s3_client.upload_file(
-                            str(local_file), config["S3_PERSIST_BUCKET"], s3_key
+                            Filename=str(local_file),
+                            Bucket=config["S3_PERSIST_BUCKET"],
+                            Key=s3_key,
+                            ExtraArgs={"ContentType": "application/json"},
                         )
                     except ClientError as e:
                         logger.error(f"Error uploading file {local_file.name}: {e}")
