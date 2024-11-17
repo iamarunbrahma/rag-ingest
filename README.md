@@ -6,6 +6,7 @@
 [![Medium](https://img.shields.io/badge/Medium-12100E?style=flat&logo=medium&logoColor=white)](https://medium.com/@iamarunbrahma)
 
 ## Table of Contents
+
 1. [Introduction](#introduction)
 2. [Features](#features)
 3. [Prerequisites](#prerequisites)
@@ -19,6 +20,7 @@
 11. [Disclaimer](#disclaimer)
 
 ## Introduction
+
 RAG-Ingest is an advanced tool designed to seamlessly convert PDF documents into markdown format while preserving the original layout and formatting. It leverages state-of-the-art technologies to extract text, images, tables, and code blocks, making them ready for sophisticated natural language processing tasks. The extracted content is indexed in a vector database (Qdrant) to enhance Retrieval Augmented Generation (RAG) capabilities, enabling efficient and context-aware information retrieval.
 
 
