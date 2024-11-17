@@ -1,9 +1,9 @@
 # RAG-Ingest: PDF to Markdown Extraction and Indexing for RAG
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Author: Arun Brahma](https://img.shields.io/badge/Author-Arun%20Brahma-blue)](https://github.com/iamarunbrahma)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/iamarunbrahma)
-[![Medium](https://img.shields.io/badge/Medium-Follow-black)](https://medium.com/@iamarunbrahma)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Author: Arun Brahma](https://img.shields.io/badge/Author-Arun%20Brahma-purple)](https://github.com/iamarunbrahma)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/iamarunbrahma)
+[![Medium](https://img.shields.io/badge/Medium-12100E?style=flat&logo=medium&logoColor=white)](https://medium.com/@iamarunbrahma)
 
 ## Table of Contents
 1. [Introduction](#introduction)
