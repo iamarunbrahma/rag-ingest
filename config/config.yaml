@@ -1,0 +1,15 @@
+EMBED_MODEL: mixedbread-ai/mxbai-embed-large-v1
+OLLAMA_MODEL: llama3.1:8b
+OLLAMA_CTX_LENGTH: 32768
+OLLAMA_PREDICT_LENGTH: 4096
+QDRANT_ENABLE_HYBRID: True
+FASTEMBED_SPARSE_MODEL: Qdrant/bm42-all-minilm-l6-v2-attentions
+CHUNK_SIZE: 2048
+CHUNK_OVERLAP: 64
+OUTPUT_DIR: outputs
+DEBUG_DIR: temp
+PAGE_DELIMITER: <||WXb23TXrUn3Rxz00yNNr89HV||>
+AWS_REGION: ap-south-1
+SECRETS_MANAGER: rag_secrets
+S3_PERSIST_BUCKET: altgan-persist
+S3_DOCS_BUCKET: rag-ingested-docs

@@ -1,0 +1,17 @@
+{
+    "prompts": [
+        {
+            "name": "system",
+            "prompt_template": "You are a helpful AI Assistant that extracts contextual information for each chunk from the whole document."
+        },
+        {
+            "name": "prompt_document",
+            "prompt_template": "Here is the document:\n<document>\n{WHOLE_DOCUMENT}\n</document>\n\n\n"
+        },
+        {
+            "name": "prompt_chunk",
+            "prompt_template": "Here is the chunk we want to situate within the whole document:\n<chunk>\n{CHUNK_CONTENT}\n</chunk>\nPlease give a succinct meaningful context to situate this chunk within the overall document for the purposes of improving search retrieval of the chunk. Answer only with the succinct context and nothing else.\n\n"
+        }
+
+    ]
+}
