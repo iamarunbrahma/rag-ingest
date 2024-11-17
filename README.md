@@ -184,11 +184,6 @@ The indexing process starts by splitting documents into semantic chunks using Se
   - macOS: Download from `https://ollama.com/download/mac`
   - Windows: Currently in beta, check [Ollama GitHub](https://github.com/ollama/ollama) for updates
 
-- **System Requirements:**
-  - Minimum 8GB RAM
-  - 4GB free disk space per model
-  - NVIDIA GPU (optional, but recommended for better performance)
-
 - **Model Management:**
   - Pull models using: `ollama pull <model_name>`
   - List available models: `ollama list`
@@ -209,11 +204,6 @@ The indexing process starts by splitting documents into semantic chunks using Se
   - Adjust model parameters in `config/config.yaml`:
     - Context length (OLLAMA_CTX_LENGTH)
     - Prediction length (OLLAMA_PREDICT_LENGTH)
-
-- **Security Considerations:**
-  - Run behind firewall/reverse proxy
-  - Avoid exposing to public internet
-  - Use latest version for security updates
 
 
 ## Disclaimer
